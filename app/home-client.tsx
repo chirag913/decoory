@@ -352,7 +352,7 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
           </div>
           <div className="hidden items-center gap-3 lg:flex">
             <a
-              href="tel:+919876543210"
+              href="tel:+919821545511"
               className="magnetic flex items-center gap-2 border border-white/15 px-4 py-3 text-sm text-[#f4eadc]"
             >
               <Phone size={16} /> Call
@@ -408,8 +408,8 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
               <a href={WHATSAPP_URL} className="bg-[#eadcc4] px-5 py-4 text-center font-semibold text-[#12100d]">
                 WhatsApp Now
               </a>
-              <a href="tel:+919876543210" className="border border-white/15 px-5 py-4 text-center text-[#f4eadc]">
-                Call +91 98765 43210
+              <a href="tel:+919821545511" className="border border-white/15 px-5 py-4 text-center text-[#f4eadc]">
+                Call +91 98215 45511
               </a>
             </div>
           </motion.div>
@@ -778,7 +778,7 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
               <a href={WHATSAPP_URL} className="flex items-center justify-center gap-3 bg-[#23c45e] px-5 py-4 font-semibold text-white">
                 <MessageCircle size={19} /> WhatsApp
               </a>
-              <a href="tel:+919876543210" className="flex items-center justify-center gap-3 border border-white/18 bg-white/8 px-5 py-4 font-semibold text-[#fff7eb]">
+              <a href="tel:+919821545511" className="flex items-center justify-center gap-3 border border-white/18 bg-white/8 px-5 py-4 font-semibold text-[#fff7eb]">
                 <Phone size={19} /> Click to Call
               </a>
             </div>
@@ -865,7 +865,7 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
             </h2>
             <div className="mt-10 grid gap-4">
               {[
-                [Phone, "+91 98765 43210", "tel:+919876543210"],
+                [Phone, "+91 98765 43210", "tel:+919821545511"],
                 [MessageCircle, "WhatsApp Consultation", WHATSAPP_URL],
                 [MapPin, "A-123, Sector 63, Noida, Uttar Pradesh - 201301", MAPS_URL]
               ].map(([Icon, text, href]) => (
@@ -955,7 +955,7 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
       </footer>
 
       <div className="fixed bottom-4 left-4 right-4 z-50 grid grid-cols-2 gap-3 lg:hidden">
-        <a href="tel:+919876543210" className="flex items-center justify-center gap-2 bg-[#eadcc4] px-4 py-4 text-sm font-semibold text-[#11100e]">
+        <a href="tel:+919821545511" className="flex items-center justify-center gap-2 bg-[#eadcc4] px-4 py-4 text-sm font-semibold text-[#11100e]">
           <Phone size={17} /> Call Now
         </a>
         <a href={WHATSAPP_URL} className="flex items-center justify-center gap-2 bg-[#23c45e] px-4 py-4 text-sm font-semibold text-white">
