@@ -39,7 +39,7 @@ const WHATSAPP_URL =
   "https://wa.me/919876543210?text=Hi%20Decoory%20Interiors%2C%20I%20want%20to%20book%20a%20free%20luxury%20interior%20consultation.";
 
 const LEAD_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzdUiJLQsJMxSUQ8gMlmPv4L_IUG32wSOM9jiija24hgT73L3Bu8CLD9Y33acMpIrE/exec";
+  "https://script.google.com/macros/s/AKfycbxyI4wwv0WxK1VoWoCvWaKEzPB95bFQ0kkU87Tk41k3FtJ3iZIZeHH-_AdqdP7J9R1a/exec";
 
 const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=A-123%2C%20Sector%2063%2C%20Noida%2C%20Uttar%20Pradesh%20201301";
