@@ -36,7 +36,7 @@ import {
 } from "lucide-react";
 
 const WHATSAPP_URL =
-  "https://wa.me/919876543210?text=Hi%20Decoory%20Interiors%2C%20I%20want%20to%20book%20a%20free%20luxury%20interior%20consultation.";
+  "https://wa.me/919821545511?text=Hi%20Decoory%20Interiors%2C%20I%20want%20to%20book%20a%20free%20luxury%20interior%20consultation.";
 
 const LEAD_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxyI4wwv0WxK1VoWoCvWaKEzPB95bFQ0kkU87Tk41k3FtJ3iZIZeHH-_AdqdP7J9R1a/exec";
@@ -185,18 +185,47 @@ function slug(label: string) {
 
 function Logo() {
   return (
-    <Link href="#top" className="group flex items-center gap-3" aria-label="Decoory Interiors home">
-      <span className="grid size-10 place-items-center border border-[#c8a96a]/45 bg-[#c8a96a]/10 text-sm font-semibold text-[#eadcc4]">
-        DI
-      </span>
-      <span>
-        <span className="block font-display text-xl font-semibold leading-none tracking-normal text-[#fff7eb]">
+    <Link href="#top" className="group flex items-center" aria-label="Decoory Interiors home">
+      <svg
+        viewBox="0 0 520 120"
+        className="h-10 w-auto"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        {/* Wordmark: Decoory */}
+        <text
+          x="0"
+          y="90"
+          fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif"
+          fontWeight="700"
+          fontSize="96"
+          fill="#fff7eb"
+          letterSpacing="-2"
+        >
           Decoory
-        </span>
-        <span className="text-[10px] uppercase tracking-[0.28em] text-[#c8a96a]">
-          Interiors
-        </span>
-      </span>
+        </text>
+        {/* House roof icon — outer/lower chevron */}
+        <polyline
+          points="430,78 472,36 514,78"
+          stroke="#2a2a2a"
+          strokeWidth="12"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+        {/* House roof icon — inner/upper chevron (red) */}
+        <polyline
+          points="443,63 472,36 501,63"
+          stroke="#e63030"
+          strokeWidth="12"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+        {/* Small window square */}
+        <rect x="465" y="68" width="14" height="14" rx="1" fill="#2a2a2a" />
+      </svg>
     </Link>
   );
 }
