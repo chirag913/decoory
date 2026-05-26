@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import type { FormEvent } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { gsap } from "gsap";
@@ -36,6 +37,12 @@ import {
 
 const WHATSAPP_URL =
   "https://wa.me/919876543210?text=Hi%20Decoory%20Interiors%2C%20I%20want%20to%20book%20a%20free%20luxury%20interior%20consultation.";
+
+const LEAD_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbzdUiJLQsJMxSUQ8gMlmPv4L_IUG32wSOM9jiija24hgT73L3Bu8CLD9Y33acMpIrE/exec";
+
+const MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=A-123%2C%20Sector%2063%2C%20Noida%2C%20Uttar%20Pradesh%20201301";
 
 const navItems = ["Projects", "Services", "Process", "Testimonials", "Contact"];
 
@@ -178,7 +185,7 @@ function slug(label: string) {
 
 function Logo() {
   return (
-    <Link href="#" className="group flex items-center gap-3" aria-label="Decoory Interiors home">
+    <Link href="#top" className="group flex items-center gap-3" aria-label="Decoory Interiors home">
       <span className="grid size-10 place-items-center border border-[#c8a96a]/45 bg-[#c8a96a]/10 text-sm font-semibold text-[#eadcc4]">
         DI
       </span>
@@ -232,6 +239,7 @@ export default function HomePage() {
   const [slide, setSlide] = useState(0);
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeProject, setActiveProject] = useState<(typeof projects)[number] | null>(null);
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const filteredProjects = useMemo(
     () =>
@@ -272,8 +280,32 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
+  async function handleLeadSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    formData.set("source", "Decoory website consultation form");
+    formData.set("pageUrl", window.location.href);
+    formData.set("submittedAt", new Date().toISOString());
+
+    setFormStatus("submitting");
+
+    try {
+      await fetch(LEAD_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      });
+      setFormStatus("success");
+      form.reset();
+    } catch {
+      setFormStatus("error");
+    }
+  }
+
   return (
-    <main className="relative overflow-hidden">
+    <main id="top" className="relative overflow-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -751,7 +783,7 @@ export default function HomePage() {
               </a>
             </div>
           </div>
-          <form className="glass grid gap-4 p-5 md:grid-cols-2 md:p-8">
+          <form onSubmit={handleLeadSubmit} className="glass grid gap-4 p-5 md:grid-cols-2 md:p-8">
             {[
               ["Name", "text"],
               ["Phone", "tel"],
@@ -763,6 +795,7 @@ export default function HomePage() {
                 <input
                   required={label === "Name" || label === "Phone"}
                   type={type}
+                  name={label.toLowerCase()}
                   placeholder={label}
                   className="border border-white/12 bg-black/35 px-4 py-4 text-[#fff7eb] outline-none transition placeholder:text-[#786f64] focus:border-[#c8a96a]"
                 />
@@ -770,7 +803,7 @@ export default function HomePage() {
             ))}
             <label className="grid gap-2 text-sm text-[#d8cebf]">
               Project Type
-              <select className="border border-white/12 bg-black/35 px-4 py-4 text-[#fff7eb] outline-none focus:border-[#c8a96a]">
+              <select name="projectType" className="border border-white/12 bg-black/35 px-4 py-4 text-[#fff7eb] outline-none focus:border-[#c8a96a]">
                 <option>Luxury Home Interiors</option>
                 <option>Villa Interiors</option>
                 <option>Modular Kitchen</option>
@@ -782,16 +815,17 @@ export default function HomePage() {
             </label>
             <label className="grid gap-2 text-sm text-[#d8cebf]">
               Budget
-              <select className="border border-white/12 bg-black/35 px-4 py-4 text-[#fff7eb] outline-none focus:border-[#c8a96a]">
-                <option>₹5L - ₹15L</option>
-                <option>₹15L - ₹35L</option>
-                <option>₹35L - ₹75L</option>
-                <option>₹75L - ₹1Cr+</option>
+              <select name="budget" className="border border-white/12 bg-black/35 px-4 py-4 text-[#fff7eb] outline-none focus:border-[#c8a96a]">
+                <option>Rs 5L - Rs 15L</option>
+                <option>Rs 15L - Rs 35L</option>
+                <option>Rs 35L - Rs 75L</option>
+                <option>Rs 75L - Rs 1Cr+</option>
               </select>
             </label>
             <label className="grid gap-2 text-sm text-[#d8cebf] md:col-span-2">
               Message
               <textarea
+                name="message"
                 rows={5}
                 placeholder="Tell us about your property, timeline and preferred style."
                 className="resize-none border border-white/12 bg-black/35 px-4 py-4 text-[#fff7eb] outline-none transition placeholder:text-[#786f64] focus:border-[#c8a96a]"
@@ -801,10 +835,23 @@ export default function HomePage() {
               <p className="flex items-center gap-2 text-sm text-[#bdb3a7]">
                 <Clock size={16} className="text-[#c8a96a]" /> Response usually within 15 minutes during business hours.
               </p>
-              <button className="inline-flex items-center justify-center gap-3 bg-[#eadcc4] px-7 py-4 font-semibold text-[#11100e]">
-                Schedule Consultation <ArrowRight size={18} />
+              <button
+                disabled={formStatus === "submitting"}
+                className="inline-flex items-center justify-center gap-3 bg-[#eadcc4] px-7 py-4 font-semibold text-[#11100e] disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {formStatus === "submitting" ? "Sending..." : "Schedule Consultation"} <ArrowRight size={18} />
               </button>
             </div>
+            {formStatus === "success" ? (
+              <p className="border border-[#23c45e]/35 bg-[#23c45e]/10 px-4 py-3 text-sm text-[#bff2cf] md:col-span-2">
+                Thank you. Your consultation request has been sent. Our team will contact you shortly.
+              </p>
+            ) : null}
+            {formStatus === "error" ? (
+              <p className="border border-red-400/35 bg-red-500/10 px-4 py-3 text-sm text-red-100 md:col-span-2">
+                Something went wrong. Please try again or message us on WhatsApp.
+              </p>
+            ) : null}
           </form>
         </div>
       </section>
@@ -820,7 +867,7 @@ export default function HomePage() {
               {[
                 [Phone, "+91 98765 43210", "tel:+919876543210"],
                 [MessageCircle, "WhatsApp Consultation", WHATSAPP_URL],
-                [MapPin, "A-123, Sector 63, Noida, Uttar Pradesh - 201301", "#"]
+                [MapPin, "A-123, Sector 63, Noida, Uttar Pradesh - 201301", MAPS_URL]
               ].map(([Icon, text, href]) => (
                 <a key={text as string} href={href as string} className="glass flex items-center gap-4 p-5">
                   <Icon className="text-[#c8a96a]" size={23} />
@@ -850,10 +897,17 @@ export default function HomePage() {
                 Luxury home interiors, timeless experiences and end-to-end execution for premium apartments, villas and modern Indian homes.
               </p>
               <div className="mt-6 flex gap-3">
-                {[Instagram, Facebook, Youtube, Award].map((Icon, index) => (
+                {[
+                  [Instagram, "https://www.instagram.com/"],
+                  [Facebook, "https://www.facebook.com/"],
+                  [Youtube, "https://www.youtube.com/"],
+                  [Award, MAPS_URL]
+                ].map(([Icon, href], index) => (
                   <a
                     key={index}
-                    href="#"
+                    href={href as string}
+                    target="_blank"
+                    rel="noreferrer"
                     aria-label="Social profile"
                     className="grid size-10 place-items-center border border-white/12 text-[#eadcc4]"
                   >
