@@ -315,7 +315,7 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
             name: "Decoory Interiors",
             image:
               "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=82",
-            telephone: "+91 98765 43210",
+            telephone: "+91 9821545511",
             email: "hello@decoory.com",
             address: {
               "@type": "PostalAddress",
@@ -865,7 +865,7 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
             </h2>
             <div className="mt-10 grid gap-4">
               {[
-                [Phone, "+91 98765 43210", "tel:+919821545511"],
+                [Phone, "+91 9821545511", "tel:+919821545511"],
                 [MessageCircle, "WhatsApp Consultation", WHATSAPP_URL],
                 [MapPin, "A-123, Sector 63, Noida, Uttar Pradesh - 201301", MAPS_URL]
               ].map(([Icon, text, href]) => (
