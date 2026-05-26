@@ -281,28 +281,28 @@ export default function HomePage() {
   }, []);
 
   async function handleLeadSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  event.preventDefault();
 
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    formData.set("source", "Decoory website consultation form");
-    formData.set("pageUrl", window.location.href);
-    formData.set("submittedAt", new Date().toISOString());
+  const form = event.currentTarget;
+  const formData = new FormData(form);
+  formData.set("source", "Decoory website consultation form");
+  formData.set("pageUrl", window.location.href);
+  formData.set("submittedAt", new Date().toISOString());
 
-    setFormStatus("submitting");
+  setFormStatus("submitting");
 
-    try {
-      await fetch(LEAD_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: formData
-      });
-      setFormStatus("success");
-      form.reset();
-    } catch {
-      setFormStatus("error");
-    }
+  try {
+    await fetch(LEAD_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: new URLSearchParams(formData as any), // ← this line changed
+    });
+    setFormStatus("success");
+    form.reset();
+  } catch {
+    setFormStatus("error");
   }
+}
 
   return (
     <main id="top" className="relative overflow-hidden">
