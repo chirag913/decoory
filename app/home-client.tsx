@@ -42,7 +42,7 @@ const LEAD_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxyI4wwv0WxK1VoWoCvWaKEzPB95bFQ0kkU87Tk41k3FtJ3iZIZeHH-_AdqdP7J9R1a/exec";
 
 const MAPS_URL =
-  "https://www.google.com/maps/search/?api=1&query=A-123%2C%20Sector%2063%2C%20Noida%2C%20Uttar%20Pradesh%20201301";
+  "https://maps.app.goo.gl/gedreZ25HHour9yKA";
 
 const navItems = ["Projects", "Services", "Process", "Testimonials", "Contact"];
 
@@ -879,7 +879,7 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
           <div className="min-h-[430px] overflow-hidden border border-white/12 bg-[#15120e]">
             <iframe
               title="Decoory Interiors location map"
-              src="https://www.google.com/maps?q=Sector%2063%20Noida&output=embed"
+              src="https://www.google.com/maps?q=Decoory+Interiors&output=embed"
               className="h-full min-h-[430px] w-full border-0 grayscale invert-[.9] contrast-125"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -898,9 +898,9 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
               </p>
               <div className="mt-6 flex gap-3">
                 {[
-                  [Instagram, "https://www.instagram.com/"],
-                  [Facebook, "https://www.facebook.com/"],
-                  [Youtube, "https://www.youtube.com/"],
+                  [Instagram, "https://www.instagram.com/decoory_interiors/"],
+                  [Facebook, "https://www.facebook.com/DecooryInteriors/"],
+                  [Youtube, "https://www.youtube.com/@decooryinteriors"],
                   [Award, MAPS_URL]
                 ].map(([Icon, href], index) => (
                   <a
