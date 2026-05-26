@@ -295,7 +295,7 @@ export default function HomePage() {
     await fetch(LEAD_SCRIPT_URL, {
       method: "POST",
       mode: "no-cors",
-      body: new URLSearchParams(formData as any), // ← this line changed
+body: new URLSearchParams(formData as unknown as Record<string, string>),
     });
     setFormStatus("success");
     form.reset();
