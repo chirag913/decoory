@@ -189,7 +189,7 @@ function Logo() {
       <img
         src="/logo.png"
         alt="Decoory Interiors"
-        className="h-12 w-auto md:h-16"
+        className="h-14 w-auto md:h-16"
       />
     </Link>
   );
