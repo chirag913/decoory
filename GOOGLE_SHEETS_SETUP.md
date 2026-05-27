@@ -2,7 +2,7 @@
 
 The website consultation form posts to:
 
-`https://script.google.com/macros/s/AKfycbzdUiJLQsJMxSUQ8gMlmPv4L_IUG32wSOM9jiija24hgT73L3Bu8CLD9Y33acMpIrE/exec`
+`https://script.google.com/macros/s/AKfycbxyI4wwv0WxK1VoWoCvWaKEzPB95bFQ0kkU87Tk41k3FtJ3iZIZeHH-_AdqdP7J9R1a/exec`
 
 The endpoint currently returns `403 Forbidden` to test submissions, so the Google Apps Script deployment must be public before live leads can reach the sheet.
 
