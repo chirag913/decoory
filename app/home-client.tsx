@@ -186,46 +186,11 @@ function slug(label: string) {
 function Logo() {
   return (
     <Link href="#top" className="group flex items-center" aria-label="Decoory Interiors home">
-      <svg
-        viewBox="0 0 520 120"
+      <img
+        src="/logo.png"
+        alt="Decoory Interiors"
         className="h-10 w-auto"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        {/* Wordmark: Decoory */}
-        <text
-          x="0"
-          y="90"
-          fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif"
-          fontWeight="700"
-          fontSize="96"
-          fill="#fff7eb"
-          letterSpacing="-2"
-        >
-          Decoory
-        </text>
-        {/* House roof icon — outer/lower chevron */}
-        <polyline
-          points="430,78 472,36 514,78"
-          stroke="#2a2a2a"
-          strokeWidth="12"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-        {/* House roof icon — inner/upper chevron (red) */}
-        <polyline
-          points="443,63 472,36 501,63"
-          stroke="#e63030"
-          strokeWidth="12"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-        {/* Small window square */}
-        <rect x="465" y="68" width="14" height="14" rx="1" fill="#2a2a2a" />
-      </svg>
+      />
     </Link>
   );
 }
