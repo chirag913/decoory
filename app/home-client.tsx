@@ -313,10 +313,10 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
             email: "hello@decoory.com",
             address: {
               "@type": "PostalAddress",
-              streetAddress: "A-123, Sector 63",
+              streetAddress: "GF -71, center, Gaur City 1, Sector 4, Greater Noida, Ghaziabad, Uttar Pradesh 201318",
               addressLocality: "Noida",
               addressRegion: "Uttar Pradesh",
-              postalCode: "201301",
+              postalCode: "201318",
               addressCountry: "IN"
             },
             areaServed: ["Noida", "Delhi NCR", "Gurugram", "Ghaziabad"],
