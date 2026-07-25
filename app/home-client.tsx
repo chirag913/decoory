@@ -21,6 +21,7 @@ import {
   Home,
   Instagram,
   Layers3,
+  LogIn,
   MapPin,
   Menu,
   MessageCircle,
@@ -43,6 +44,10 @@ const LEAD_SCRIPT_URL =
 
 const MAPS_URL =
   "https://maps.app.goo.gl/gedreZ25HHour9yKA";
+
+const CLIENT_LOGIN_URL = "https://app.decoory.com/";
+
+const STAFF_LOGIN_URL = "https://dashboard.decoory.com/";
 
 const navItems = ["Projects", "Services", "Process", "Testimonials", "Contact"];
 
@@ -346,14 +351,30 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
           </div>
           <div className="hidden items-center gap-3 lg:flex">
             <a
+              href={STAFF_LOGIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden whitespace-nowrap text-sm text-[#d8cebf]/60 transition hover:text-[#f8ecd8] xl:block"
+            >
+              Staff Login
+            </a>
+            <a
+              href={CLIENT_LOGIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="magnetic flex items-center gap-2 whitespace-nowrap border border-[#c8a96a]/50 px-4 py-3 text-sm text-[#eadcc4]"
+            >
+              <LogIn size={16} /> Client Login
+            </a>
+            <a
               href="tel:+919821545511"
-              className="magnetic flex items-center gap-2 border border-white/15 px-4 py-3 text-sm text-[#f4eadc]"
+              className="magnetic flex items-center gap-2 whitespace-nowrap border border-white/15 px-4 py-3 text-sm text-[#f4eadc]"
             >
               <Phone size={16} /> Call
             </a>
             <a
               href="#consultation"
-              className="magnetic flex items-center gap-2 bg-[#eadcc4] px-5 py-3 text-sm font-semibold text-[#12100d]"
+              className="magnetic flex items-center gap-2 whitespace-nowrap bg-[#eadcc4] px-5 py-3 text-sm font-semibold text-[#12100d]"
             >
               Book Consultation <ArrowRight size={16} />
             </a>
@@ -399,11 +420,27 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
               ))}
             </div>
             <div className="mt-12 grid gap-3">
+              <a
+                href={CLIENT_LOGIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 border border-[#c8a96a]/50 px-5 py-4 text-center font-semibold text-[#eadcc4]"
+              >
+                <LogIn size={18} /> Client Login
+              </a>
               <a href={WHATSAPP_URL} className="bg-[#eadcc4] px-5 py-4 text-center font-semibold text-[#12100d]">
                 WhatsApp Now
               </a>
               <a href="tel:+919821545511" className="border border-white/15 px-5 py-4 text-center text-[#f4eadc]">
                 Call +91 98215 45511
+              </a>
+              <a
+                href={STAFF_LOGIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2 text-center text-sm text-[#d8cebf]/60"
+              >
+                Staff Login
               </a>
             </div>
           </motion.div>
@@ -918,6 +955,12 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
                     {item}
                   </a>
                 ))}
+                <a href={CLIENT_LOGIN_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#eadcc4]">
+                  Client Login
+                </a>
+                <a href={STAFF_LOGIN_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#eadcc4]">
+                  Staff Login
+                </a>
               </div>
             </div>
             <div>
