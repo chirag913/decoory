@@ -325,12 +325,7 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
               addressCountry: "IN"
             },
             areaServed: ["Noida", "Delhi NCR", "Gurugram", "Ghaziabad"],
-            priceRange: "Rs Rs Rs Rs",
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "4.9",
-              reviewCount: "247"
-            }
+            priceRange: "Rs Rs Rs Rs"
           })
         }}
       />
