@@ -4,12 +4,14 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://decoory.com"),
   title: {
-    default: "Decoory Interiors | Luxury Interior Design in Noida, Delhi NCR",
+    default: "Decoory Interiors | Complete Turnkey Interior Designer in Greater Noida West",
     template: "%s | Decoory Interiors"
   },
   description:
-    "Premium home interior design for luxury apartments, villas, modular kitchens, bedrooms, wardrobes and turnkey residential interiors across Noida and Delhi NCR.",
+    "Complete turnkey interior design in Greater Noida West — design, woodwork, civil, electrical, plumbing, false ceiling, painting and furniture, all under one roof.",
   keywords: [
+    "interior designer Greater Noida West",
+    "turnkey interior designer Greater Noida West",
     "luxury interior designer Noida",
     "premium interiors Delhi NCR",
     "turnkey home interior design",
@@ -18,9 +20,9 @@ export const metadata: Metadata = {
     "high end home interior design India"
   ],
   openGraph: {
-    title: "Decoory Interiors | Designing Spaces That Define Luxury",
+    title: "Decoory Interiors | Complete Turnkey Interior Designer in Greater Noida West",
     description:
-      "Luxury home interiors, turnkey execution, modular kitchens and premium renovations for apartments, villas and modern Indian homes.",
+      "Design, woodwork, civil, electrical, plumbing, false ceiling, painting and furniture — complete interior solutions under one roof for homes in Greater Noida West.",
     url: "https://decoory.com",
     siteName: "Decoory Interiors",
     type: "website",

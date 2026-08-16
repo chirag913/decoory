@@ -1,29 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import type { FormEvent } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowRight,
-  Award,
   BadgeCheck,
   Building2,
   CalendarDays,
   ChefHat,
   ChevronDown,
-  Clock,
-  Facebook,
   Gem,
   Home,
-  Instagram,
   Layers3,
-  LogIn,
   MapPin,
-  Menu,
   MessageCircle,
   Phone,
   Play,
@@ -32,24 +24,16 @@ import {
   Sparkles,
   Star,
   Tv,
-  X,
-  Youtube
+  X
 } from "lucide-react";
-
-const WHATSAPP_URL =
-  "https://wa.me/919821545511?text=Hi%20Decoory%20Interiors%2C%20I%20want%20to%20book%20a%20free%20luxury%20interior%20consultation.";
-
-const LEAD_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxyI4wwv0WxK1VoWoCvWaKEzPB95bFQ0kkU87Tk41k3FtJ3iZIZeHH-_AdqdP7J9R1a/exec";
-
-const MAPS_URL =
-  "https://maps.app.goo.gl/gedreZ25HHour9yKA";
-
-const CLIENT_LOGIN_URL = "https://app.decoory.com/";
-
-const STAFF_LOGIN_URL = "https://dashboard.decoory.com/";
-
-const navItems = ["Projects", "Services", "Process", "Testimonials", "Contact"];
+import SectionIntro from "./_components/SectionIntro";
+import WhyDecoorySection from "./_components/WhyDecoorySection";
+import SiteHeader from "./_components/SiteHeader";
+import SiteFooter from "./_components/SiteFooter";
+import MobileCta from "./_components/MobileCta";
+import ConsultationForm from "./_components/ConsultationForm";
+import ChatbaseWidget from "./_components/ChatbaseWidget";
+import { MAPS_URL, WHATSAPP_URL } from "./site-config";
 
 const heroSlides = [
   "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2200&q=86",
@@ -184,61 +168,10 @@ const fadeUp = {
   show: { opacity: 1, y: 0 }
 };
 
-function slug(label: string) {
-  return label.toLowerCase().replaceAll(" ", "-").replaceAll("&", "and");
-}
-
-function Logo() {
-  return (
-    <Link href="#top" className="group flex items-center" aria-label="Decoory Interiors home">
-      <img
-        src="/logo.png"
-        alt="Decoory Interiors"
-        className="h-14 w-auto md:h-16"
-      />
-    </Link>
-  );
-}
-
-function SectionIntro({
-  eyebrow,
-  title,
-  copy
-}: {
-  eyebrow: string;
-  title: string;
-  copy?: string;
-}) {
-  return (
-    <motion.div
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      className="mx-auto mb-12 max-w-3xl text-center"
-    >
-      <p className="mb-4 text-xs font-semibold uppercase tracking-[0.38em] text-[#c8a96a]">
-        {eyebrow}
-      </p>
-      <h2 className="font-display text-4xl font-semibold leading-[0.96] text-[#fff6e8] md:text-6xl">
-        {title}
-      </h2>
-      {copy ? (
-        <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#bdb3a7] md:text-lg">
-          {copy}
-        </p>
-      ) : null}
-    </motion.div>
-  );
-}
-
 export default function HomePage() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [slide, setSlide] = useState(0);
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeProject, setActiveProject] = useState<(typeof projects)[number] | null>(null);
-  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const filteredProjects = useMemo(
     () =>
@@ -279,30 +212,6 @@ export default function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  async function handleLeadSubmit(event: FormEvent<HTMLFormElement>) {
-  event.preventDefault();
-
-  const form = event.currentTarget;
-  const formData = new FormData(form);
-  formData.set("source", "Decoory website consultation form");
-  formData.set("pageUrl", window.location.href);
-  formData.set("submittedAt", new Date().toISOString());
-
-  setFormStatus("submitting");
-
-  try {
-    await fetch(LEAD_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-body: new URLSearchParams(formData as unknown as Record<string, string>),
-    });
-    setFormStatus("success");
-    form.reset();
-  } catch {
-    setFormStatus("error");
-  }
-}
-
   return (
     <main id="top" className="relative overflow-hidden">
       <script
@@ -330,117 +239,7 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
         }}
       />
 
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#080706]/55 backdrop-blur-xl">
-        <nav className="luxury-container flex h-20 items-center justify-between">
-          <Logo />
-          <div className="hidden items-center gap-8 lg:flex">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${slug(item)}`}
-                className="text-sm text-[#d8cebf]/80 transition hover:text-[#f8ecd8]"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-          <div className="hidden items-center gap-3 lg:flex">
-            <a
-              href={STAFF_LOGIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden whitespace-nowrap text-sm text-[#d8cebf]/60 transition hover:text-[#f8ecd8] xl:block"
-            >
-              Staff Login
-            </a>
-            <a
-              href={CLIENT_LOGIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="magnetic flex items-center gap-2 whitespace-nowrap border border-[#c8a96a]/50 px-4 py-3 text-sm text-[#eadcc4]"
-            >
-              <LogIn size={16} /> Client Login
-            </a>
-            <a
-              href="tel:+919821545511"
-              className="magnetic flex items-center gap-2 whitespace-nowrap border border-white/15 px-4 py-3 text-sm text-[#f4eadc]"
-            >
-              <Phone size={16} /> Call
-            </a>
-            <a
-              href="#consultation"
-              className="magnetic flex items-center gap-2 whitespace-nowrap bg-[#eadcc4] px-5 py-3 text-sm font-semibold text-[#12100d]"
-            >
-              Book Consultation <ArrowRight size={16} />
-            </a>
-          </div>
-          <button
-            className="grid size-11 place-items-center border border-white/15 lg:hidden"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Open menu"
-          >
-            <Menu size={22} />
-          </button>
-        </nav>
-      </header>
-
-      <AnimatePresence>
-        {menuOpen ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[70] bg-[#080706]/96 p-6 backdrop-blur-2xl lg:hidden"
-          >
-            <div className="flex items-center justify-between">
-              <Logo />
-              <button
-                className="grid size-11 place-items-center border border-white/15"
-                onClick={() => setMenuOpen(false)}
-                aria-label="Close menu"
-              >
-                <X size={22} />
-              </button>
-            </div>
-            <div className="mt-16 grid gap-6">
-              {navItems.map((item) => (
-                <a
-                  key={item}
-                  href={`#${slug(item)}`}
-                  onClick={() => setMenuOpen(false)}
-                  className="font-display text-4xl text-[#fff6e8]"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-            <div className="mt-12 grid gap-3">
-              <a
-                href={CLIENT_LOGIN_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 border border-[#c8a96a]/50 px-5 py-4 text-center font-semibold text-[#eadcc4]"
-              >
-                <LogIn size={18} /> Client Login
-              </a>
-              <a href={WHATSAPP_URL} className="bg-[#eadcc4] px-5 py-4 text-center font-semibold text-[#12100d]">
-                WhatsApp Now
-              </a>
-              <a href="tel:+919821545511" className="border border-white/15 px-5 py-4 text-center text-[#f4eadc]">
-                Call +91 98215 45511
-              </a>
-              <a
-                href={STAFF_LOGIN_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-2 text-center text-sm text-[#d8cebf]/60"
-              >
-                Staff Login
-              </a>
-            </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+      <SiteHeader />
 
       <section className="noise relative flex min-h-screen items-end overflow-hidden pb-56 pt-32 lg:pb-20">
         <AnimatePresence mode="wait">
@@ -472,16 +271,16 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
             <p className="mb-5 inline-flex items-center gap-3 border border-[#c8a96a]/35 bg-black/20 px-4 py-2 text-xs uppercase tracking-[0.28em] text-[#eadcc4] backdrop-blur">
               <Sparkles size={15} className="text-[#c8a96a]" /> Luxury home interiors
             </p>
-            <h1 className="max-w-5xl font-display text-6xl font-semibold leading-[0.9] text-[#fff7eb] md:text-8xl lg:text-[5.4rem] xl:text-[6rem]">
-              Designing Spaces That Define Luxury
+            <h1 className="max-w-5xl font-display text-5xl font-semibold leading-[0.98] text-[#fff7eb] md:text-7xl lg:text-[4.4rem] xl:text-[4.8rem]">
+              Complete Turnkey Interior Designer in Greater Noida West
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-[#ded2bf] md:text-xl">
-              Premium home interiors for modern apartments, villas and luxury Indian homes.
+              Design, Woodwork, Civil, Electrical, Plumbing, False Ceiling, Painting &amp; Furniture — Complete Interior Solutions Under One Roof.
             </p>
             <div className="mt-6 grid grid-cols-2 gap-2 md:hidden">
               {[
                 ["500+", "Projects"],
-                ["10+", "Years"],
+                ["30+", "Years"],
                 ["98%", "Satisfaction"],
                 ["Turnkey", "Homes"]
               ].map(([stat, label]) => (
@@ -514,7 +313,7 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
           >
             {[
               ["500+", "Projects"],
-              ["10+", "Years Experience"],
+              ["30+", "Years Experience"],
               ["98%", "Client Satisfaction"],
               ["End-to-End", "Execution"]
             ].map(([stat, label]) => (
@@ -532,6 +331,8 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
           Scroll <ChevronDown size={16} />
         </a>
       </section>
+
+      <WhyDecoorySection />
 
       <section id="trust" className="border-y hairline bg-[#0b0a09] py-16">
         <div className="luxury-container">
@@ -780,7 +581,7 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
         </div>
       </section>
 
-      <section id="consultation" className="relative overflow-hidden py-24 md:py-32">
+      <section className="relative overflow-hidden py-24 md:py-32">
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=84"
@@ -791,94 +592,8 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
           />
           <div className="absolute inset-0 bg-[#080706]/78" />
         </div>
-        <div className="luxury-container relative grid gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-start">
-          <div className="sticky top-28">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.36em] text-[#c8a96a]">Book Now</p>
-            <h2 className="font-display text-5xl font-semibold leading-none text-[#fff6e8] md:text-7xl">
-              Your Dream Space Starts Here
-            </h2>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-[#d4c8b9]">
-              Book a free consultation with our interior experts today. Limited consultation slots available this month.
-            </p>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              <a href={WHATSAPP_URL} className="flex items-center justify-center gap-3 bg-[#23c45e] px-5 py-4 font-semibold text-white">
-                <MessageCircle size={19} /> WhatsApp
-              </a>
-              <a href="tel:+919821545511" className="flex items-center justify-center gap-3 border border-white/18 bg-white/8 px-5 py-4 font-semibold text-[#fff7eb]">
-                <Phone size={19} /> Click to Call
-              </a>
-            </div>
-          </div>
-          <form onSubmit={handleLeadSubmit} className="glass grid gap-4 p-5 md:grid-cols-2 md:p-8">
-            {[
-              ["Name", "text"],
-              ["Phone", "tel"],
-              ["Email", "email"],
-              ["City", "text"]
-            ].map(([label, type]) => (
-              <label key={label} className="grid gap-2 text-sm text-[#d8cebf]">
-                {label}
-                <input
-                  required={label === "Name" || label === "Phone"}
-                  type={type}
-                  name={label.toLowerCase()}
-                  placeholder={label}
-                  className="border border-white/12 bg-black/35 px-4 py-4 text-[#fff7eb] outline-none transition placeholder:text-[#786f64] focus:border-[#c8a96a]"
-                />
-              </label>
-            ))}
-            <label className="grid gap-2 text-sm text-[#d8cebf]">
-              Project Type
-              <select name="projectType" className="border border-white/12 bg-black/35 px-4 py-4 text-[#fff7eb] outline-none focus:border-[#c8a96a]">
-                <option>Luxury Home Interiors</option>
-                <option>Villa Interiors</option>
-                <option>Modular Kitchen</option>
-                <option>Premium Apartment Interiors</option>
-                <option>Bedroom, Wardrobe & TV Unit</option>
-                <option>Full Home Turnkey Solution</option>
-                <option>Turnkey Renovation</option>
-              </select>
-            </label>
-            <label className="grid gap-2 text-sm text-[#d8cebf]">
-              Budget
-              <select name="budget" className="border border-white/12 bg-black/35 px-4 py-4 text-[#fff7eb] outline-none focus:border-[#c8a96a]">
-                <option>Rs 5L - Rs 15L</option>
-                <option>Rs 15L - Rs 35L</option>
-                <option>Rs 35L - Rs 75L</option>
-                <option>Rs 75L - Rs 1Cr+</option>
-              </select>
-            </label>
-            <label className="grid gap-2 text-sm text-[#d8cebf] md:col-span-2">
-              Message
-              <textarea
-                name="message"
-                rows={5}
-                placeholder="Tell us about your property, timeline and preferred style."
-                className="resize-none border border-white/12 bg-black/35 px-4 py-4 text-[#fff7eb] outline-none transition placeholder:text-[#786f64] focus:border-[#c8a96a]"
-              />
-            </label>
-            <div className="grid gap-3 md:col-span-2 md:grid-cols-[1fr_auto] md:items-center">
-              <p className="flex items-center gap-2 text-sm text-[#bdb3a7]">
-                <Clock size={16} className="text-[#c8a96a]" /> Response usually within 15 minutes during business hours.
-              </p>
-              <button
-                disabled={formStatus === "submitting"}
-                className="inline-flex items-center justify-center gap-3 bg-[#eadcc4] px-7 py-4 font-semibold text-[#11100e] disabled:cursor-not-allowed disabled:opacity-70"
-              >
-                {formStatus === "submitting" ? "Sending..." : "Schedule Consultation"} <ArrowRight size={18} />
-              </button>
-            </div>
-            {formStatus === "success" ? (
-              <p className="border border-[#23c45e]/35 bg-[#23c45e]/10 px-4 py-3 text-sm text-[#bff2cf] md:col-span-2">
-                Thank you. Your consultation request has been sent. Our team will contact you shortly.
-              </p>
-            ) : null}
-            {formStatus === "error" ? (
-              <p className="border border-red-400/35 bg-red-500/10 px-4 py-3 text-sm text-red-100 md:col-span-2">
-                Something went wrong. Please try again or message us on WhatsApp.
-              </p>
-            ) : null}
-          </form>
+        <div className="luxury-container relative">
+          <ConsultationForm source="Decoory website consultation form" />
         </div>
       </section>
 
@@ -914,99 +629,8 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
         </div>
       </section>
 
-      <footer className="bg-[#070605] pb-28 pt-14 lg:pb-10">
-        <div className="luxury-container">
-          <div className="grid gap-10 border-b hairline pb-10 lg:grid-cols-[1.2fr_.8fr_.8fr_1fr]">
-            <div>
-              <Logo />
-              <p className="mt-5 max-w-sm leading-7 text-[#a89e92]">
-                Luxury home interiors, timeless experiences and end-to-end execution for premium apartments, villas and modern Indian homes.
-              </p>
-              <div className="mt-6 flex gap-3">
-                {[
-                  [Instagram, "https://www.instagram.com/decoory_interiors/"],
-                  [Facebook, "https://www.facebook.com/DecooryInteriors/"],
-                  [Youtube, "https://www.youtube.com/@decooryinteriors"],
-                  [Award, MAPS_URL]
-                ].map(([Icon, href], index) => (
-                  <a
-                    key={index}
-                    href={href as string}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Social profile"
-                    className="grid size-10 place-items-center border border-white/12 text-[#eadcc4]"
-                  >
-                    <Icon size={18} />
-                  </a>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h3 className="mb-5 font-semibold text-[#fff6e8]">Quick Links</h3>
-              <div className="grid gap-3 text-sm text-[#a89e92]">
-                {navItems.map((item) => (
-                  <a key={item} href={`#${slug(item)}`} className="hover:text-[#eadcc4]">
-                    {item}
-                  </a>
-                ))}
-                <a href={CLIENT_LOGIN_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#eadcc4]">
-                  Client Login
-                </a>
-                <a href={STAFF_LOGIN_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#eadcc4]">
-                  Staff Login
-                </a>
-              </div>
-            </div>
-            <div>
-              <h3 className="mb-5 font-semibold text-[#fff6e8]">Services</h3>
-              <div className="grid gap-3 text-sm text-[#a89e92]">
-                {services.slice(0, 5).map(([title]) => (
-                  <a key={title as string} href="#services" className="hover:text-[#eadcc4]">
-                    {title as string}
-                  </a>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h3 className="mb-5 font-semibold text-[#fff6e8]">Instagram Preview</h3>
-              <div className="grid grid-cols-3 gap-2">
-                {projects.slice(0, 6).map((project) => (
-                  <div key={project.title} className="relative aspect-square overflow-hidden">
-                    <Image src={project.image} alt={project.title} fill sizes="90px" className="object-cover" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col gap-3 pt-6 text-sm text-[#81786e] md:flex-row md:items-center md:justify-between">
-            <p>© 2026 Decoory Interiors. All rights reserved.</p>
-            <p>Brand direction: matte black, champagne gold, editorial serif typography, cinematic warm imagery.</p>
-          </div>
-        </div>
-      </footer>
-
-      <div className="fixed bottom-4 left-4 right-4 z-50 grid grid-cols-2 gap-3 lg:hidden">
-        <a href="tel:+919821545511" className="flex items-center justify-center gap-2 bg-[#eadcc4] px-4 py-4 text-sm font-semibold text-[#11100e]">
-          <Phone size={17} /> Call Now
-        </a>
-        <a href={WHATSAPP_URL} className="flex items-center justify-center gap-2 bg-[#23c45e] px-4 py-4 text-sm font-semibold text-white">
-          <MessageCircle size={17} /> WhatsApp
-        </a>
-      </div>
-      <a
-        href={WHATSAPP_URL}
-        className="fixed bottom-6 right-6 z-50 hidden size-14 place-items-center rounded-full bg-[#23c45e] text-white shadow-2xl lg:grid"
-        aria-label="Chat on WhatsApp"
-      >
-        <MessageCircle size={25} />
-      </a>
-      <a
-        href="#consultation"
-        className="fixed right-0 top-1/2 z-50 hidden -translate-y-1/2 border border-[#c8a96a]/45 bg-[#080706]/75 px-3 py-5 text-xs font-semibold uppercase tracking-[0.22em] text-[#eadcc4] [writing-mode:vertical-rl] backdrop-blur-xl lg:block"
-      >
-        Get Quote
-      </a>
+      <SiteFooter />
+      <MobileCta />
 
       <AnimatePresence>
         {activeProject ? (
@@ -1047,44 +671,7 @@ body: new URLSearchParams(formData as unknown as Record<string, string>),
           </motion.div>
         ) : null}
       </AnimatePresence>
-      <script
-  dangerouslySetInnerHTML={{
-    __html: `
-      (function(){
-        if(!window.chatbase || window.chatbase("getState") !== "initialized") {
-          window.chatbase = (...arguments) => {
-            if(!window.chatbase.q) {
-              window.chatbase.q = []
-            }
-            window.chatbase.q.push(arguments)
-          };
-          window.chatbase = new Proxy(window.chatbase, {
-            get(target, prop) {
-              if(prop === "q") {
-                return target.q
-              }
-              return (...args) => target(prop, ...args)
-            }
-          })
-        }
-
-        const onLoad = function() {
-          const script = document.createElement("script");
-          script.src = "https://www.chatbase.co/embed.min.js";
-          script.id = "fiMPXPWplO6lHE7fYEsPI";
-          script.domain = "www.chatbase.co";
-          document.body.appendChild(script);
-        };
-
-        if(document.readyState === "complete") {
-          onLoad();
-        } else {
-          window.addEventListener("load", onLoad);
-        }
-      })();
-    `,
-  }}
-/>
+      <ChatbaseWidget />
     </main>
   );
 }

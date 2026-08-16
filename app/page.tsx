@@ -1,5 +1,5 @@
-import HomeShell from "./home-shell";
+import HomeClient from "./home-client";
 
 export default function Page() {
-  return <HomeShell />;
+  return <HomeClient />;
 }
